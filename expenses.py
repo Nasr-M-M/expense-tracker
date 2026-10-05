@@ -1,24 +1,17 @@
 from datetime import date
 import json
 import math
+from storage import load_expenses, save_expenses
 
 CURRENCY = "SAR"
 
 
-def load_expenses():
-    try:
-        with open("expenses.json", "r") as file:
-            return json.load(file)
 
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
 
 
 expenses = load_expenses()
     
-def save_expenses(expenses):
-    with open("expenses.json", "w") as file:
-        json.dump(expenses, file, indent=4)
+
  
 def format_expense(item):
     return f"{item['category']} - {item['description']} - {item['amount']:.2f} {CURRENCY} - {item['date']}"
