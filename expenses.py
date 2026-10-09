@@ -174,22 +174,25 @@ def get_choice():
         except ValueError:
             print("Please put a valid number.")
 
+def find_by_category(expenses, category):
+    results = []
+    for item in expenses:
+        if item["category"].strip().lower() == category.strip().lower():
+            results.append(item)
+    return results   
+
+    
 
 def search_by_category(expenses):
     if not expenses:
         print("There are no expenses to search.")
         return
-
     category = get_text("Enter category to search: ")
-    found = False
-
-    for i, item in enumerate(expenses, start=1):
-        if item["category"].strip().lower() == category.strip().lower():
-            print(f"{i}. {format_expense(item)}")
-            found = True
-
-    if not found:
+    result = find_by_category(expenses, category)
+    if not result:
         print(f"No expenses found in category '{category}'.")
+    else:
+        display_expenses(result)
 
 
 def get_edit_choice():

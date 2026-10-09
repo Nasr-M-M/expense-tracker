@@ -1,5 +1,5 @@
 from unittest.mock import patch
-from expenses import format_expense, get_amount, get_date, show_total  
+from expenses import format_expense, get_amount, get_date, show_total , find_by_category
 
 def test_format_expense():
     item = {
@@ -53,5 +53,23 @@ def test_get_date_retry():
         assert result == '2023-09-25'
 
 test_get_date_retry()
+
+def test_find_by_category():
+    expenses = [
+        {"amount": 50.0, "category": "food", "description": "lunch", "date": "2026-09-28"},
+        {"amount": 30.0, "category": "game", "description": "diablo", "date": "2026-09-25"},
+        {"amount": 20.0, "category": "food", "description": "snack", "date": "2026-09-26"},
+    ]
+    result = find_by_category(expenses, 'food')
+    assert len(result) == 2
+    assert all(item['category'] == 'food' for item in result)
+    
+    result = find_by_category(expenses, "  FOOD ")
+    assert len(result) == 2
+
+    result = find_by_category(expenses, "xyz")
+    assert result == []
+
+test_find_by_category()
 
 print("All tests passed!")
