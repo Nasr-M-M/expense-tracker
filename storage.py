@@ -17,10 +17,6 @@ def save_expenses(expenses):
         json.dump(expenses, file, indent=4)
 
 
-
-
-
-
 def init_db():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -36,6 +32,42 @@ def init_db():
     conn.commit()
     conn.close()
 
+
+def add_expense_db(expense):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute(
+        "INSERT INTO expenses (amount, category, description, date) VALUES (?, ?, ?, ?)",
+        (
+            expense["amount"],
+            expense["category"],
+            expense["description"],
+            expense["date"],
+        ),
+    )
+    conn.commit()
+    conn.close()
+
+
+def get_all_expenses_db():
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, amount, category, description, date FROM expenses")
+    rows = cursor.fetchall()
+    conn.close()
+
+    expenses = []
+    for row in rows:
+        expenses.append({
+            "id": row[0],
+            "amount": row[1],
+            "category": row[2],
+            "description": row[3],
+            "date": row[4],
+        })
+    return expenses
+
+
 if __name__ == "__main__":
     init_db()
-    print("Database ready.")
+    print(get_all_expenses_db())
