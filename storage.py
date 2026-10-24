@@ -2,6 +2,7 @@ import json
 
 import sqlite3
 DB_NAME = "expenses.db"
+ALLOWED_FIELDS = {"amount", "category", "description", "date"}
 
 def load_expenses():
     try:
@@ -66,6 +67,31 @@ def get_all_expenses_db():
             "date": row[4],
         })
     return expenses
+
+
+def delete_expense_db(expense_id):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM expenses WHERE id = ?", (expense_id,))
+    conn.commit()
+    conn.close()
+
+
+
+
+
+def update_expense_db(expense_id, field, new_value):
+    if field not in ALLOWED_FIELDS:
+        raise ValueError(f"Invalid field: {field}")
+
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute(
+        f"UPDATE expenses SET {field} = ? WHERE id = ?",
+        (new_value, expense_id),
+    )
+    conn.commit()
+    conn.close()
 
 
 if __name__ == "__main__":
