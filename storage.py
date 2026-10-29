@@ -109,7 +109,14 @@ def find_by_category_db(category):
         for r in rows
     ]
 
+def migrate_json_to_db():
+    expenses = load_expenses()
+    for item in expenses:
+        add_expense_db(item)
+    return len(expenses)
+
 if __name__ == "__main__":
     init_db()
-    print(find_by_category_db("  FOOD "))
-    print(find_by_category_db("xyz"))
+    delete_expense_db(1)
+    delete_expense_db(3)
+    print(get_all_expenses_db())
