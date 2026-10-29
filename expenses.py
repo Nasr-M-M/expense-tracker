@@ -63,6 +63,7 @@ def add_expense(expenses):
         }
 
     expenses.append(entry)
+    return entry
 
 
 

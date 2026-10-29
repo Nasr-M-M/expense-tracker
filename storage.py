@@ -117,6 +117,4 @@ def migrate_json_to_db():
 
 if __name__ == "__main__":
     init_db()
-    delete_expense_db(1)
-    delete_expense_db(3)
     print(get_all_expenses_db())

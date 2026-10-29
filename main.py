@@ -1,8 +1,8 @@
 from expenses import (
     get_choice, add_expense, view_expenses, delete_expense,
-    show_total, search_by_category, edit_expense, CURRENCY,
+    show_total, search_by_category, edit_expense, CURRENCY
 )
-from storage import init_db, get_all_expenses_db, save_expenses
+from storage import init_db, get_all_expenses_db, save_expenses, add_expense_db
 
 
 
@@ -15,8 +15,8 @@ if __name__ == "__main__":
     choice = get_choice()
     while choice != 7:
         if choice == 1:
-            add_expense(expenses)
-            save_expenses(expenses)
+            entry = add_expense(expenses)
+            add_expense_db(entry)
 
         elif choice == 2:
             view_expenses(expenses)
