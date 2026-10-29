@@ -2,13 +2,16 @@ from expenses import (
     get_choice, add_expense, view_expenses, delete_expense,
     show_total, search_by_category, edit_expense, CURRENCY,
 )
-from storage import load_expenses, save_expenses
+from storage import init_db, get_all_expenses_db, save_expenses
 
 
 
 
 if __name__ == "__main__":
-    expenses = load_expenses()
+
+    init_db()
+    expenses = get_all_expenses_db()
+
     choice = get_choice()
     while choice != 7:
         if choice == 1:
