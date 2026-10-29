@@ -93,7 +93,23 @@ def update_expense_db(expense_id, field, new_value):
     conn.commit()
     conn.close()
 
+def find_by_category_db(category):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT id, amount, category, description, date FROM expenses "
+        "WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))",
+        (category,),
+    )
+    rows = cursor.fetchall()
+    conn.close()
+
+    return [
+        {"id": r[0], "amount": r[1], "category": r[2], "description": r[3], "date": r[4]}
+        for r in rows
+    ]
 
 if __name__ == "__main__":
     init_db()
-    print(get_all_expenses_db())
+    print(find_by_category_db("  FOOD "))
+    print(find_by_category_db("xyz"))
