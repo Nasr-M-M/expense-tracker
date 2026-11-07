@@ -128,7 +128,7 @@ def delete_expense(expenses):
                 if confirm == "y":
                     removed = expenses.pop(number - 1)
                     print(f"Deleted: {format_expense(removed)}")
-                    break
+                    return removed
 
                 elif confirm == "n":
                     continue

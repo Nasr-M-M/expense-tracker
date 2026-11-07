@@ -2,7 +2,7 @@ from expenses import (
     get_choice, add_expense, view_expenses, delete_expense,
     show_total, search_by_category, edit_expense, CURRENCY
 )
-from storage import init_db, get_all_expenses_db, save_expenses, add_expense_db
+from storage import init_db, get_all_expenses_db, save_expenses, add_expense_db, delete_expense_db
 
 
 
@@ -22,8 +22,9 @@ if __name__ == "__main__":
             view_expenses(expenses)
 
         elif choice == 3:
-            delete_expense(expenses)
-            save_expenses(expenses)
+            removed = delete_expense(expenses)
+            if removed:
+                delete_expense_db(removed["id"])
 
         elif choice == 4:
             total = show_total(expenses)
