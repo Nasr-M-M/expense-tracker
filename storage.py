@@ -1,22 +1,6 @@
-import json
-
 import sqlite3
 DB_NAME = "expenses.db"
 ALLOWED_FIELDS = {"amount", "category", "description", "date"}
-
-def load_expenses():
-    try:
-        with open("expenses.json", "r") as file:
-            return json.load(file)
-
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
-
-
-def save_expenses(expenses):
-    with open("expenses.json", "w") as file:
-        json.dump(expenses, file, indent=4)
-
 
 def init_db():
     conn = sqlite3.connect(DB_NAME)
@@ -109,11 +93,6 @@ def find_by_category_db(category):
         for r in rows
     ]
 
-def migrate_json_to_db():
-    expenses = load_expenses()
-    for item in expenses:
-        add_expense_db(item)
-    return len(expenses)
 
 if __name__ == "__main__":
     init_db()

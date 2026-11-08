@@ -2,7 +2,7 @@ from expenses import (
     get_choice, add_expense, view_expenses, delete_expense,
     show_total, search_by_category, edit_expense, CURRENCY
 )
-from storage import init_db, get_all_expenses_db, save_expenses, add_expense_db, delete_expense_db, update_expense_db
+from storage import init_db, get_all_expenses_db, add_expense_db, delete_expense_db, update_expense_db
 
 
 

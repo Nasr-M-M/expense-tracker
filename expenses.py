@@ -1,7 +1,5 @@
 from datetime import date
-import json
 import math
-from storage import load_expenses, save_expenses
 
 CURRENCY = "SAR"
 
