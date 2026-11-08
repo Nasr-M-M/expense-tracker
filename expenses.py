@@ -237,19 +237,22 @@ def edit_expense(expenses):
         choice = get_edit_choice()
 
         if choice == 1:
+            field = "amount"
             expense["amount"] = get_amount()
         elif choice == 2:
+            field = "category"
             expense["category"] = get_text("Category: ")
         elif choice == 3:
+            field = "description"
             expense["description"] = get_text("Description: ")
         elif choice == 4:
+            field = "date"
             expense["date"] = get_date()
         else:
-            return
+            return None
 
         print("Expense updated successfully.")
-        save_expenses(expenses)
-        return
+        return expense["id"], field, expense[field]
 
 
 
