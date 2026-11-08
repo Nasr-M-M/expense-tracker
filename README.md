@@ -6,7 +6,13 @@ A command-line app to track personal expenses, built with Python.
 - Add, view, edit, and delete expenses
 - Search by category
 - Show total
-- Data saved in JSON
+- Data saved in a SQLite database
+
+## Project structure
+- main.py: runs the menu
+- expenses.py: expense logic and input validation
+- storage.py: SQLite database functions
+- test_expenses.py: tests
 
 ## How to run
 python main.py
