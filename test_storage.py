@@ -43,7 +43,34 @@ def test_delete():
 
     os.remove("test_expenses.db")
 
+def test_update():
+    if os.path.exists("test_expenses.db"):
+        os.remove("test_expenses.db")
+
+    storage.init_db()
+    storage.add_expense_db(
+        {"amount": 10.0, "category": "food", "description": "a", "date": "2026-09-28"}
+    )
+
+    item = storage.get_all_expenses_db()[0]
+    storage.update_expense_db(item["id"], "amount", 99.0)
+    result = storage.get_all_expenses_db()
+
+    assert result[0]["amount"] == 99.0
+    assert result[0]["category"] == "food"
+
+    os.remove("test_expenses.db")
+
+def test_update_invalid_field():
+    try:
+        storage.update_expense_db(1, "amount; DROP TABLE expenses", 5)
+    except ValueError:
+        return
+    assert False, "Expected ValueError"
+
+
 test_add_and_get()
 test_delete()
-
+test_update()
+test_update_invalid_field()
 print("Storage tests passed!")
