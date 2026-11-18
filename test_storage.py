@@ -104,10 +104,3 @@ def test_find_by_category():
 
     os.remove("test_expenses.db")
 
-
-test_add_and_get()
-test_delete()
-test_update()
-test_update_invalid_field()
-test_find_by_category()
-print("Storage tests passed!")

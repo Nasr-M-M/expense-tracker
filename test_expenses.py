@@ -12,7 +12,7 @@ def test_format_expense():
     print(result)
     assert result == "food - lunch - 60.00 SAR - 2026-09-28"
 
-test_format_expense()
+
 
 
 
@@ -24,35 +24,34 @@ def test_show_total():
     result = show_total(expenses)
     assert result == 80.0
 
-test_show_total()
+
 
 def test_get_amount():
     with patch('builtins.input', return_value='50'):
         result = get_amount()
         assert result == 50.0
 
-test_get_amount()
 
 def test_get_amount_retry():
     with patch('builtins.input', side_effect=['abc', '-5', '25']):
         result = get_amount()
         assert result == 25.0
 
-test_get_amount_retry()
+
 
 def test_get_date():
     with patch('builtins.input', return_value='2023-10-01'):
         result = get_date()
         assert result == '2023-10-01'
 
-test_get_date()
+
 
 def test_get_date_retry():
     with patch('builtins.input', side_effect=['2023/09/25', '2023.09.25', '2023-09-25']):
         result = get_date()
         assert result == '2023-09-25'
 
-test_get_date_retry()
+
 
 def test_find_by_category():
     expenses = [
@@ -70,6 +69,5 @@ def test_find_by_category():
     result = find_by_category(expenses, "xyz")
     assert result == []
 
-test_find_by_category()
 
-print("All tests passed!")
+
