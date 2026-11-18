@@ -6,6 +6,14 @@
 </head>
 <body>
     <h1>My Expenses</h1>
+    <h2>Add expense</h2>
+    <form method="post" action="/add">
+    <input type="number" step="0.01" name="amount" placeholder="Amount" required>
+    <input type="text" name="category" placeholder="Category" required>
+    <input type="text" name="description" placeholder="Description" required>
+    <input type="date" name="date" required>
+    <button type="submit">Add</button>
+    </form>
     <table border="1">
         <tr>
             <th>Date</th>
