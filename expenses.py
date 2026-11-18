@@ -21,7 +21,11 @@ def display_expenses(expenses):
     for i, item in enumerate(expenses, start=1):
         print(f"{i}. {format_expense(item)}")
 
-
+def validate_amount(text):
+    amount = float(text)
+    if not (amount > 0 and math.isfinite(amount)):
+        raise ValueError("Amount must be a positive number.")
+    return amount
 
 def get_amount():
     while True:
