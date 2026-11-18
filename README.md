@@ -15,7 +15,10 @@ A command-line app to track personal expenses, built with Python.
 - test_expenses.py: tests
 
 ## How to run
-python main.py
+```python main.py```
 
 ## How to run tests
-python test_expenses.py
+```
+pip install pytest
+python -m pytest
+```

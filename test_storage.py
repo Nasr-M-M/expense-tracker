@@ -103,4 +103,3 @@ def test_find_by_category():
     assert result == []
 
     os.remove("test_expenses.db")
-
