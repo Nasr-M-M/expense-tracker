@@ -30,16 +30,9 @@ def validate_amount(text):
 def get_amount():
     while True:
         try:
-            amount = float(input("Amount: "))
-
-            if amount > 0 and math.isfinite(amount):
-                return amount
-            else:
-                print("Amount must be a valid number.")
-
+            return validate_amount(input("Amount: "))
         except ValueError:
-            print("Please enter a valid number.")
-
+            print("Please enter a valid positive number.")
 
 def get_text(prompt):
     while True:
