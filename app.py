@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-from expenses import CURRENCY, validate_amount
+from expenses import CURRENCY, validate_amount, validate_text
 from storage import init_db, get_all_expenses_db, add_expense_db
 
 app = Flask(__name__)
@@ -18,15 +18,19 @@ def expenses_page():
 
 @app.route("/add", methods=["POST"])
 def add_page():
+    
     try:
         amount = validate_amount(request.form["amount"])
-    except ValueError:
-        return "Invalid amount. Please go back and enter a positive number.", 400
+        category = validate_text(request.form["category"])
+        description = validate_text(request.form["description"])
+    except ValueError as error:
+        return f"Invalid input: {error}", 400
+
 
     expense = {
         "amount": amount,
-        "category": request.form["category"],
-        "description": request.form["description"],
+        "category": category,
+        "description": description,
         "date": request.form["date"],
     }
     add_expense_db(expense)
