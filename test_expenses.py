@@ -1,5 +1,29 @@
+import pytest
 from unittest.mock import patch
-from expenses import format_expense, get_amount, get_date, show_total , find_by_category
+from expenses import format_expense, get_amount, get_date, show_total , find_by_category, validate_amount, validate_text, validate_date
+
+
+
+def test_validate_amount():
+    assert validate_amount("5") == 5.0
+
+    for bad in ["-5", "0", "inf", "nan", "abc"]:
+        with pytest.raises(ValueError):
+            validate_amount(bad)
+
+def test_validate_text():
+    assert validate_text("hello") == "hello"
+
+    for bad in ["", "   ", "\n"]:
+        with pytest.raises(ValueError):
+            validate_text(bad)
+
+def test_validate_date():
+    assert validate_date("2026-09-25") == "2026-09-25"
+
+    for bad in ["25/09/2026", "2026-99-99", "hello"]:
+        with pytest.raises(ValueError):
+            validate_date(bad)
 
 def test_format_expense():
     item = {
