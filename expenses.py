@@ -66,8 +66,12 @@ def add_expense(expenses):
 
 
 def validate_date(text):
-    return date.fromisoformat(text).isoformat()
-
+    try:
+        return date.fromisoformat(text).isoformat()
+    except ValueError:
+        raise ValueError("Invalid date. Please use YYYY-MM-DD.")
+ 
+    
 def get_date():
     while True:
         date_input = input("Date (press Enter for today): ")
