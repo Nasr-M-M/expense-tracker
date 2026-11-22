@@ -34,13 +34,17 @@ def get_amount():
         except ValueError:
             print("Please enter a valid positive number.")
 
+def validate_text(text):
+    if text.strip() == "":
+        raise ValueError("This field cannot be empty.")
+    return text
+
 def get_text(prompt):
     while True:
-        text = input(prompt)
-        if text.strip() != "":
-            return text
-        else:
-            print("This field cannot be empty.")
+        try:
+            return validate_text(input(prompt))
+        except ValueError as error:
+            print(error)
 
 
 def add_expense(expenses):
