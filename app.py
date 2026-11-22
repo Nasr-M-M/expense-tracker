@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, redirect
 from expenses import CURRENCY, validate_amount, validate_text, validate_date
-from storage import init_db, get_all_expenses_db, add_expense_db
+from storage import init_db, get_all_expenses_db, add_expense_db, delete_expense_db
 
 app = Flask(__name__)
-
 
 @app.route("/")
 def home():
@@ -38,6 +37,10 @@ def add_page():
 
     return redirect("/expenses")
 
+@app.route("/delete/<int:expense_id>", methods=["POST"])
+def delete_page(expense_id):
+    delete_expense_db(expense_id)
+    return redirect("/expenses")
 
 if __name__ == "__main__":
     init_db()
