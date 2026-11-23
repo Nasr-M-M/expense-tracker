@@ -103,3 +103,27 @@ def test_find_by_category():
     assert result == []
 
     os.remove("test_expenses.db")
+
+def test_update_full():
+    if os.path.exists("test_expenses.db"):
+        os.remove("test_expenses.db")
+
+    storage.init_db()
+    storage.add_expense_db(
+        {"amount": 10.0, "category": "food", "description": "a", "date": "2026-09-28"}
+    )
+
+    item = storage.get_all_expenses_db()[0]
+    storage.update_expense_full_db(
+        item["id"],
+        {"amount": 99.0, "category": "game", "description": "b", "date": "2026-10-01"},
+    )
+    result = storage.get_all_expenses_db()
+
+    assert len(result) == 1
+    assert result[0]["amount"] == 99.0
+    assert result[0]["category"] == "game"
+    assert result[0]["description"] == "b"
+    assert result[0]["date"] == "2026-10-01"
+
+    os.remove("test_expenses.db")

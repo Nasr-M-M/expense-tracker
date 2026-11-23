@@ -77,6 +77,23 @@ def update_expense_db(expense_id, field, new_value):
     conn.commit()
     conn.close()
 
+def update_expense_full_db(expense_id, expense):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute(
+        "UPDATE expenses SET amount = ?, category = ?, description = ?, date = ? "
+        "WHERE id = ?",
+        (
+            expense["amount"],
+            expense["category"],
+            expense["description"],
+            expense["date"],
+            expense_id,
+        ),
+    )
+    conn.commit()
+    conn.close()
+
 def find_by_category_db(category):
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
