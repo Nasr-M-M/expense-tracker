@@ -52,6 +52,26 @@ def get_all_expenses_db():
         })
     return expenses
 
+def get_expense_db(expense_id):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute(
+        "SELECT id, amount, category, description, date FROM expenses WHERE id = ?",
+        (expense_id,),
+    )
+    row = cursor.fetchone()
+    conn.close()
+
+    if row is None:
+        return None
+
+    return {
+        "id": row[0],
+        "amount": row[1],
+        "category": row[2],
+        "description": row[3],
+        "date": row[4],
+    }
 
 def delete_expense_db(expense_id):
     conn = sqlite3.connect(DB_NAME)

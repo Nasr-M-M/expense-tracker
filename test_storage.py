@@ -104,6 +104,7 @@ def test_find_by_category():
 
     os.remove("test_expenses.db")
 
+
 def test_update_full():
     if os.path.exists("test_expenses.db"):
         os.remove("test_expenses.db")
@@ -125,5 +126,27 @@ def test_update_full():
     assert result[0]["category"] == "game"
     assert result[0]["description"] == "b"
     assert result[0]["date"] == "2026-10-01"
+
+    os.remove("test_expenses.db")
+
+
+def test_get_expense():
+    if os.path.exists("test_expenses.db"):
+        os.remove("test_expenses.db")
+
+    storage.init_db()
+    storage.add_expense_db(
+        {"amount": 10.0, "category": "food", "description": "a", "date": "2026-09-28"}
+    )
+    storage.add_expense_db(
+        {"amount": 20.0, "category": "game", "description": "b", "date": "2026-09-28"}
+    )
+
+    first = storage.get_all_expenses_db()[0]
+    result = storage.get_expense_db(first["id"])
+
+    assert result["category"] == "food"
+
+    assert storage.get_expense_db(9999) is None
 
     os.remove("test_expenses.db")
