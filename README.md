@@ -4,7 +4,7 @@ A personal expense tracker built with Python. It has a command-line version and 
 
 ## Features
 - Add, view, edit, and delete expenses (command line)
-- View and add expenses from a web page
+- Add, edit, and delete expenses from the web page
 - Search by category and show the total
 - Input validation shared by both versions
 - Data saved in a SQLite database
@@ -17,6 +17,9 @@ A personal expense tracker built with Python. It has a command-line version and 
 - storage.py: SQLite database functions
 - test_expenses.py: tests for the logic and validation
 - test_storage.py: tests for the database functions
+- app.py: Flask web app
+- templates/expenses.html: the main page template
+- templates/edit.html: the edit page template
 
 ## How to run the command-line app
 ```
