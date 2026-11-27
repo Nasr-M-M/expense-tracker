@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit expense</title>
+</head>
+<body>
+    <h1>Edit expense</h1>
+    <form method="post" action="/edit/{{ expense.id }}">
+        <input type="number" step="0.01" name="amount" value="{{ expense.amount }}" required>
+        <input type="text" name="category" value="{{ expense.category }}" required>
+        <input type="text" name="description" value="{{ expense.description }}" required>
+        <input type="date" name="date" value="{{ expense.date }}" required>
+        <button type="submit">Save</button>
+    </form>
+    <a href="/expenses">Cancel</a>
+</body>
+</html>

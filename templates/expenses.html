@@ -14,7 +14,7 @@
     <input type="date" name="date" min="2000-01-01" max="2100-12-31" required>
     <button type="submit">Add</button>
     </form>
-    <table border="1">
+        <table border="1">
         <tr>
             <th>Date</th>
             <th>Category</th>
@@ -29,6 +29,7 @@
             <td>{{ item.description }}</td>
             <td>{{ "%.2f"|format(item.amount) }} {{ currency }}</td>
             <td>
+                <a href="/edit/{{ item.id }}">Edit</a>
                 <form method="post" action="/delete/{{ item.id }}" onsubmit="return confirm('Delete this expense?')">
                      <button type="submit">Delete</button> 
                 </form>
