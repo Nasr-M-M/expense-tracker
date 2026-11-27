@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, abort
 from expenses import CURRENCY, show_total, validate_amount, validate_text, validate_date
 from storage import (
     init_db, get_all_expenses_db, add_expense_db,
-    delete_expense_db, get_expense_db,update_expense_full_db
+    delete_expense_db, get_expense_db,update_expense_full_db,find_by_category_db
 )
 
 app = Flask(__name__)
@@ -14,10 +14,18 @@ def home():
 
 @app.route("/expenses")
 def expenses_page():
-    expenses = get_all_expenses_db()
+    category = request.args.get("category", "").strip()
+    if category:
+        expenses = find_by_category_db(category)
+    else:
+        expenses = get_all_expenses_db()
     total = show_total(expenses)
     return render_template(
-        "expenses.html", expenses=expenses, currency=CURRENCY, total=total
+        "expenses.html",
+        expenses=expenses,
+        currency=CURRENCY,
+        total=total,
+        category=category,
     )
 
 
